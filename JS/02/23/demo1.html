@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 浮点数的精度问题
+      var result = 0.1 + 0.2;
+      console.log(result); // 结果不是 0.3 而是 0.30000000000000004
+      console.log(0.07 * 100); // 结果不是 7 而是 7.000000000000001
+      console.log(result == 0.3); // false 不要直接判断两个浮点数是否相等
+
+      // 前置自增和后置自增区别
+      // 后置自增 先返回原值 后自加1
+      var age = 10;
+      console.log(age++ + 10); // 20
+      console.log(age); // 11
+      // 前置自增 先自加1 后返回原值
+      var age = 10;
+      console.log(++age + 10); // 21
+      console.log(age); // 11
+
+      // == 默认转换数据类型 会把字符串型的数据转换为数字型
+      console.log(18 == "18"); // true
+      // === 要求两侧的值和数据类型完全一致
+      console.log(18 === "18"); // false
+
+      // 逻辑中断很重要 它会影响我们程序运行结果
+      var num = 0;
+      console.log(123 || num++);
+      console.log(num); // 0
+    </script>
+  </head>
+  <body></body>
+</html>

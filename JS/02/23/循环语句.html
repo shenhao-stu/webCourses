@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      //   for (var i = 1; i <= 1000; i++) {
+      //     console.log("hello");
+      //   }
+      // 求学生成绩
+      var num = prompt("please input student number:");
+      var sum = 0;
+      var average = 0;
+      for (var i = 1; i <= num; i++) {
+        var score = prompt("please input " + i + "th student's score");
+        sum += parseFloat(score);
+      }
+      average = sum / num;
+      alert("total score is " + sum);
+      alert("average score is " + average);
+
+      // 打印 n 行 n 列的 *
+      // 1
+      var n = prompt("please input n:");
+      for (var i = 1; i <= n; i++) {
+        var str = "";
+        for (var j = 1; j <= n - i + 1; j++) {
+          str += "*";
+        }
+        console.log(str + "\n");
+      }
+      // 2
+      var n = prompt("please input n:");
+      var str = "";
+      for (var i = 1; i <= n; i++) {
+        for (var j = i; j <= n; j++) {
+          str += "*";
+        }
+        str += "\n";
+      }
+      console.log(str);
+
+      // while
+      var num = 1;
+      while (num <= 100) {
+        console.log("hello");
+        num++;
+      }
+      // do while
+      var i = 1;
+      do {
+        console.log("how are you?");
+        i++;
+      } while (i <= 100);
+    </script>
+  </head>
+  <body></body>
+</html>

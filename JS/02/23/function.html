@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+    // 预解析分为变量预解析（变量提升）和函数预解析（函数提升）
+    // （1）变量提升 就是把所有的变量声明提升到当前的作用域最前面 不提升赋值操作
+    // （2）函数提升 就是把所有的函数声明提升到当前作用域的最前面 不调用函数（匿名函数的调用必须放在声明后面）
+      function sayHi() {
+        console.log("hi~~");
+      }
+      sayHi();
+      // 1.函数形参实参个数匹配问题
+      function getSum(num1, num2) {
+        console.log(num1 + num2);
+        return num1 + num2;
+      }
+      // 1.1 如果实参的个数多于形参的个数 会取到形参的个数
+      // 1.2 如果实参的个数少于实参的个数 多于的形参定义为undefined 最终的结果就是NaN
+
+      // 2.return
+      // 2.1 return只能返回一个值
+      // 2.2 return是终止函数
+      // 2.3 函数没有return 返回的是undefined
+
+      // arguments的使用 arguments对象中存储了传递的所有实参
+      function fn() {
+        console.log(arguments); // arguments对象中存储了传递的所有实参
+        console.log(arguments.length);
+        // 可以按照数组的方式遍历arguments
+        for (var i = 0; i < arguments.length; i++) {
+          console.log(arguments[i]);
+        }
+      }
+      fn(1, 2, 3, 4);
+      // 伪数组 并不是真正意义上的数组
+      // 1.具有数组的length属性
+      // 2.按照索引的方式进行存储的
+      // 3.它没有真正数组的一些方法 pop() push() 等等
+
+      // 利用函数反转任意数组 reverse 翻转
+      function reverse(arr) {
+        var newArr = [];
+        for (var i = arr.length - 1; i > 0; i--) {
+          newArr[newArr.length] = arr[i];
+        }
+        return newArr;
+      }
+      // bubblesort
+      function sort(arr) {
+        for (var i = 0; i < arr.length - 1; i++) {
+          for (var j = 0; j < arr.length - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+              var tmp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = tmp;
+            }
+          }
+        }
+        return arr;
+      }
+      // 另一种函数定义的方法 匿名函数
+      // 匿名函数的调用必须写在匿名函数声明的下面
+      // (1) sort是变量名 不是函数名
+      // (2) 函数表达式声明方式跟声明变量差不多，只不过变量里面存的是值 而 函数表达式里面存的是函数
+      // (3) 函数表达式也可以进行传递参数
+      var sort = function (arr) {
+        for (var i = 0; i < arr.length - 1; i++) {
+          for (var j = 0; j < arr.length - 1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+              var tmp = arr[j];
+              arr[j] = arr[j + 1];
+              arr[j + 1] = tmp;
+            }
+          }
+        }
+        return arr;
+      };
+    </script>
+  </head>
+  <body></body>
+</html>

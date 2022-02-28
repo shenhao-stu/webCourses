@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // new Array()
+      var arr1 = Array(); // 创建了一个空的数组
+      var arr2 = Array(2); // 这个2表示数组的长度为2 里面有2个空的数组元素
+      var arr3 = Array(2, 3, 4); //  等价于[2,3,4]
+
+      // 检测是否为数组
+      // 1.instanceof
+      var arr = [];
+      console.log(arr instanceof Array);
+      // 2.Array.isArray(obj) H5新增的方法
+      console.log(Array.isArray(arr));
+
+      // 翻转数组
+      function reverse(arr) {
+        if (arr instanceof Array) {
+          var newarr = [];
+          for (var i = arr.length - 1; i > 0; i--) {
+            newarr[newarr.length] = arr[i];
+          }
+          return newarr;
+        } else {
+          return "arguments is not array!";
+        }
+      }
+
+      // 添加删除数组元素
+      // 1.push()
+      // - push 是可以给数组追加新的元素
+      // - push 参数直接写数组元素就可以了
+      // - 返回值是新数组的长度
+      // - 原数组也会发生变化
+      var arr = [1, 2, 3];
+      var newlength = arr.push(4, 5, 6); // 6
+      console.log(arr);
+
+      // 2.unshift() 在数组的开头添加一个或者多个数组元素
+      arr.unshift("red", "purple");
+      console.log(arr);
+
+      // 3.pop()
+      // - pop 可以删除数组的最后一个元素
+      // - pop 是没有参数的
+      // - 返回值是删除的元素
+      // - 原数组也会发生变化
+      lastvalue = arr.pop();
+      console.log(arr);
+
+      // 4.shift()
+      firstvalue = arr.shift();
+      console.log(arr);
+    </script>
+  </head>
+  <body></body>
+</html>

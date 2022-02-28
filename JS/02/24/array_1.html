@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 筛选数组
+      var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] >= 10) {
+          newArr.push(arr[i]);
+        }
+      }
+      console.log(newArr);
+      // 翻转数组
+      var arr = ["pink", "red", "1"];
+      console.log(arr.reverse()); // 返回值就是数组
+
+      // 字符串排序
+      var arr1 = [44, 4, 2, 1, 9, 5];
+      console.log(arr1.sort()); // 返回值就是数组 [1, 2, 4, 44, 5, 9]
+
+      // 冒泡排序
+      var arr1 = [44, 4, 2, 1, 9, 5];
+      arr1.sort(function (a, b) {
+        return a - b; // 升序的顺序排列
+        // return b-a // 降序的顺序排列
+      });
+      console.log(arr1);
+
+      // 数组索引方法
+      // 1.indexOf(数组元素) 返回匹配的第一个数组元素索引号
+      var arr = ["red", "green", "blue", "blue"];
+      console.log(arr.indexOf("blue")); // 如果找不到元素返回-1
+      // 2.lastIndexOf(数组元素) 返回匹配的最后一个数组元素索引号
+      console.log(arr.lastIndexOf("blue")); // 如果找不到元素返回-1
+
+      // 数组去重
+      function unique(arr) {
+        var newArr = [];
+        for (var i = 0; i < arr.length; i++) {
+          if (newArr.indexOf(arr[i]) == -1) {
+            newArr.push(arr[i]);
+          }
+        }
+        return newArr;
+      }
+      var demo = unique([2, 4, 4, 5, 6, 7, 8, 8, 9]);
+      console.log(demo);
+
+      // 数组转换为字符串
+      // 1.toString(); 将我们的数组转换为字符串
+      var arr = [1, 2, 3];
+      console.log(arr.toString()); // "1,2,3"
+      // 2.join(sep)
+      var arr1 = ["green", "red", "pink"];
+      console.log(arr1.join("&")); // "1&2&3"
+      console.log(arr1.join()); // 默认为逗号 "1,2,3"
+      // concat() 连接两个或多个数组 不影响原数组 返回值:返回一个新的数组
+      // slice() 数组截取slice(begin,end)  返回值:返回被截取项目的新数组
+      // splice() 数组删除splice(第几个开始,要删除个数) 返回值:返回被删除项目的新数组 注意,这个会影响原数组
+      console.log(arr1.splice(1, 1)); // 'red'
+      console.log(arr1); // ['green','pink']
+    </script>
+  </head>
+  <body></body>
+</html>

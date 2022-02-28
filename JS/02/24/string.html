@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 基本包装类型
+      var str = "andy";
+      console.log(str.length);
+      // 基本包装类型:把简单数据类型包装成为了复杂数据类型object
+      // 步骤
+      var tmp = new String("andy"); // 生成临时变量,把简单数据类型包装为复杂数据类型
+      var str = tmp; // 赋值给我们声明的字符变量
+      tmp = null; // 销毁临时变量
+
+      // 字符串的不可变性。拼接字符串只是开辟了新的内存空间存储新的字符串
+      // 根据字符返回位置 indexOf('要查找的字符',[起始的索引位置]) lastIndexOf('要查找的字符',[起始的索引位置]) 包含起始的索引位置
+      // 案例:查找字符串"abcoefoxyozzopp"中所有o出现的位置以及次数
+      var txt = "abcoefoxyozzopp";
+      var index = txt.indexOf("o");
+      var count = 0;
+      while (index != -1) {
+        console.log(index);
+        count++;
+        index = txt.indexOf("o", index + 1);
+      }
+      console.log("o出现的次数是:" + count);
+
+      // 1.charAt(index) 根据位置返回字符
+      var str = "andy";
+      for (var i = 0; i < str.length; i++) {
+        console.log(str.charAt(i));
+      }
+      // 2.charCodeAt(index) 返回相应索引号的字符ASCII值 目的:判断用户按下了哪个键
+      console.log(str.charCodeAt(0)); // 97
+      // 3.str[index] H5新增
+      console.log(str[0]); // 'a'
+
+      // 案例:统计字符串"abcoefoxyozzopp"中出现次数最多的字符,并统计其次数
+      var txt = "abcoefoxyozzopp";
+      var o = {};
+      for (var i = 0; i < txt.length; i++) {
+        var chars = txt[i];
+        if (o[chars]) {
+          o[chars]++;
+        } else {
+          o[chars] = 1;
+        }
+      }
+      console.log(o);
+      // 遍历对象
+      var max = 0;
+      var maxchar = "";
+      for (var k in o) {
+        if (o[k] >= max) {
+          max = o[k];
+          maxchars = k;
+        }
+      }
+      console.log("maxchar:" + maxchars + " counts:" + max);
+      // 字符串操作方法
+      // 1.concat(str1,str2,str3) 等效于+
+      // 2.substr(start,length) 从start位置开始（索引号）,length为取的个数
+      // 3.slice(start,end) 从start位置开始,截取到end位置,end取不到（他们俩都是索引号）
+      // 4.substring(start,end) 从start位置开始,截取到end位置,end取不到 基本和slice相同 但是不接受负值
+
+      // 1.替换字符串 replace('被替换的字符','替换为的字符') 只会替换第一个字符 **原字符串不会发生变化** 返回值为新的字符串
+      var str = "andyandy";
+      console.log(str.replace("a", "b")); // bndyandy
+      console.log(str); // andyandy
+      // 全部替换
+      var str = "abcoefoxyozzopp";
+      while (str.indexOf("o") !== -1) {
+        str = str.replace("o", "*");
+      }
+      console.log(str);
+
+      // 2.字符串转换为数组 split(sep)
+      var str1 = "red&pink&yellow";
+      console.log(str1.split("&"));
+
+      // toUpperCase()
+      // toLowerCase()
+    </script>
+  </head>
+  <body></body>
+</html>

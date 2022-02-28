@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // Date() 日期对象 是一个构造函数 必须使用 new 来调用创建我们的日期对象
+      var now = new Date(); // 如果Date()中没有参数 返回系统的当前时间
+      console.log(now); // Thu Feb 24 2022 09:57:05 GMT+0800 (中国标准时间)
+
+      // 1.参数的常用写法
+      var date1 = new Date(2022, 10, 1); // 1.数字型的参数 返回的是Nov不是Oct（日期的索引从0-11）
+      var date2 = new Date("2022-10-1 8:0:0"); // 2.字符串型的参数 返回的是Oct
+
+      // 2.格式化日期 年月日
+      var week = [
+        "星期日",
+        "星期一",
+        "星期二",
+        "星期三",
+        "星期四",
+        "星期五",
+        "星期六",
+      ];
+      var year = now.getFullYear(); // 2022
+      var month = now.getMonth() + 1; // 2月Feb对应的索引是1,因此now.getMonth()返回的是1,需要+1操作
+      var date = now.getDate(); // 24
+      var day = now.getDay(); // 4 周日 0 周六 6
+      console.log(year + "年" + month + "月" + date + "日 " + week[day]);
+
+      // 封装一个函数返回当前的时分秒 格式 08:08:08
+      function getTime() {
+        var time = new Date();
+        var h = time.getHours();
+        h = h < 10 ? "0" + h : h;
+        var m = time.getMinutes();
+        m = m < 10 ? "0" + m : m;
+        var s = time.getSeconds();
+        s = s < 10 ? "0" + s : s;
+        return h + ":" + m + ":" + s;
+      }
+      console.log(getTime());
+
+      // 获取当前日期距离1970年1月1日经历的总的毫秒数 !!时间戳!!
+      // 1.通过 valueOf() getTime()
+      var now = new Date();
+      console.log(now.valueOf());
+      console.log(now.getTime());
+      // 2.简单写法
+      console.log(+new Date());
+      // 3.h5方法
+      console.log(Date.now());
+
+      // 案例1:时间戳转换为时分秒
+      // 转换公式如下:
+      // s = parseInt(总秒数 % 60);
+      // m = parseInt((总秒数 / 60) % 60);
+      // h = parseInt((总秒数 / 60 / 60) % 24);
+      // d = parseInt(总秒数 / 60 / 60 / 24);
+      function countDown(inputTime) {
+        var times = (+new Date(inputTime) - +new Date()) / 1000; // 毫秒数转换为秒
+        s = parseInt(times % 60);
+        s = s < 10 ? "0" + s : s;
+        m = parseInt((times / 60) % 60);
+        m = m < 10 ? "0" + m : m;
+        h = parseInt((times / 60 / 60) % 24);
+        h = h < 10 ? "0" + h : h;
+        d = parseInt(times / 60 / 60 / 24);
+        d = d < 10 ? "0" + d : d;
+        return d + "天" + h + "时" + m + "分" + s + "秒";
+      }
+      console.log(countDown("2022-2-24 11:0:0"));
+    </script>
+  </head>
+  <body></body>
+</html>

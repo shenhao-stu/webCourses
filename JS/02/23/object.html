@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // object
+      // 1.利用{}
+      // 属性不需要声明
+      var obj = {
+        uname: "shenhao",
+        age: 22,
+        sex: "male",
+        sayHi: function () {
+          console.log("hi~");
+        },
+      };
+      console.log(obj.uname);
+      console.log(obj["age"]);
+      obj.sayHi();
+      // 2.利用new
+      var obj = new Object();
+      obj.uname = "shenhao";
+      obj.age = 22;
+      obj.sex = "male";
+      obj.sayHi = function () {
+        console.log("hi~");
+      };
+      // 3.利用构造函数（java中的类）创建对象
+      // 构造函数：是一种特殊的函数，主要用来初始化对象，即为对象成员变量赋初始值，它总与new运算符一起使用。我们可以把对象中一些公共的属性和方法抽取出来，然后封装到这个函数里面
+      function Star(uname, age, sex) {
+        this.name = uname;
+        this.age = age;
+        this.sex = sex;
+        this.sing = function (song) {
+          console.log(song);
+        };
+      }
+      var obj = new Star("shenhao", 22, "male");
+      obj.sing("hello world");
+      // 1.构造函数的名字首字母要大写
+      // 2.我们构造函数不需要return就可以返回结果
+      // 3.我们调用构造函数 必须使用new
+      // 4.我们只需要new Star()调用函数就创建一个对象{}
+      // 5.我们利用构造函数创建对象的过程称为对象实例化
+
+      // for in 遍历对象或者数组
+      for (var key in obj) {
+        console.log(key); // k 变量 输出 得到的是属性名
+        console.log(obj[key]); // obj[k]得到的是 属性值
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

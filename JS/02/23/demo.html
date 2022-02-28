@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 简单交互
+      var age = prompt("请输入你的年龄");
+      var str = "您今年已经" + age + "岁啦";
+      alert(str);
+
+      // 数值运算中 true=1 false=0
+      // undefined
+      var variable = undefined;
+      console.log(variable + "pink"); // undefinedpink
+      console.log(variable + 1); // NaN undefined 和数字相加 最后的结果是NaN
+
+      // null 空值
+      var space = null;
+      console.log(space + "pink"); // nullpink
+      console.log(space + 1); // 1
+
+      // typeof
+      var num = 10;
+      console.log(typeof num); // number
+      var str = "pink";
+      console.log(typeof str); // string
+      var flag = true;
+      console.log(typeof flag); // boolean
+      var vari = undefined;
+      console.log(typeof vari); // undefined
+      var timer = null;
+      console.log(typeof timer); // object
+      // prompt 取过来的值是字符型
+
+      // 数据类型转换
+      // 1.把数字型转换为字符串型
+      var num = 10;
+      var str = num.toString();
+      var str = String(num);
+      var str = "" + num;
+
+      // 2.转换为数字型
+      var age = prompt("please input your age");
+      // 2.1 parseInt(var) 可以把 字符型的转换为数字型 得到是整数 去尾
+      console.log(parseInt(age));
+      // 2.2 parseFloat(var) 可以把 字符型的转换为数字型 得到是小数 浮点数
+      console.log(parseFloat("3.14"));
+      // 2.3 Number(var)
+      console.log(Number("3.14"));
+      // 2.4 利用了算数运输 - * / 隐式转换
+      console.log("12" - 0); // 12
+      console.log("12" / "11"); // 1.0909090909090908
+
+      // 3.Boolean()
+      // 代表空、否定的值会被转换为false，如'',0,NaN,null,undefined
+      // 其余值都会转换为true
+      
+    </script>
+  </head>
+  <body></body>
+</html>

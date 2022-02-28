@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 1.数组初始化
+      // 1.1 new
+      var arr = new Array();
+      // 1.2 []
+      var arr = [];
+      var myarr = [1, 2, "pink", true];
+      alert(myarr);
+      alert(myarr[2]); // pink
+      alert(myarr[4]); // undefined
+      // 2.遍历数组元素
+      for (var i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+      }
+      // 3.新增数组元素
+      // 3.1.修改length长度
+      var arr = ["red", "green", "blue"];
+      console.log(arr.length);
+      arr.length = 5;
+      console.log(arr[3]); // undefined
+
+      // 3.2.修改索引号
+      var arr1 = ["red", "green", "blue"];
+      arr1[5] = "yellow";
+      console.log(arr1); // ['red', 'green', 'blue', 空属性 × 2, 'yellow']
+
+      // 4.筛选数组方法
+      var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7];
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (arr[i] >= 10) {
+          newArr[newArr.length] = arr[i];
+        }
+      }
+      console.log(newArr);
+    </script>
+  </head>
+  <body></body>
+</html>

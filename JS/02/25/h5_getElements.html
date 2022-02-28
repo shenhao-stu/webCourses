@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="box">盒子1</div>
+    <!-- class="box" div.box id="nav" div#nav -->
+    <div class="box">盒子2</div>
+    <div id="nav">
+      <ul>
+        <li>首页</li>
+        <li>产品</li>
+      </ul>
+    </div>
+    <script>
+      // 1.document.getElementsByClassName('类名') 根据类名返回元素对象集合
+      var boxes = document.getElementsByClassName("box");
+      console.log(boxes); // [div.box,div.box]
+
+      // 2.document.querySelector('选择器') 根据指定选择器返回第一个元素对象
+      // .box 表示类选择器 #nav 表示id选择器 li 表示标签选择器
+      var firstBox = document.querySelector(".box"); // <div class="box">盒子1</div>
+      var nav = document.querySelector("#id"); // <div id="nav">...</div>
+      var li = document.querySelector("li"); // <li>首页</li>
+
+      // 3.document.querSelectorAll('选择器') 根据指定选择器返回所有元素对象集合
+      var allBox = document.querySelectorAll(".box");
+      console.log(allBox); // [div.box,div.box]
+      var lis = document.querySelectorAll("li");
+      console.log(lis); // [li,li]
+
+      // 4.获取body元素
+      var bodyEle = document.body;
+      console.log(bodyEle);
+      console.dir(bodyEle); // 打印我们返回的元素对象
+      // 5.获取html元素
+      var htmlEle = document.documentElement; // 返回html元素对象
+    </script>
+  </body>
+</html>

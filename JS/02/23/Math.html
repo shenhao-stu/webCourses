@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // 内置对象
+      Math.abs();
+      Math.floor();
+      Math.ceil();
+      Math.round(); // 四舍五入 其他数字都是四舍五入，但是.5特殊 它往大了取 -1.5～-1 -1.6～-2 1.5～2
+      Math.random(); // [0,1)
+      // 得到两个数之间的随机整数 并且 包含这2个整数
+      function getRandom(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      // bubble sort
+      var objarr = [8, 3, 5, 2, 0, 8, 4, 6, 1, 7];
+      var tmp = 0;
+      for (var i = 0; i < objarr.length - 1; i++) {
+        for (var j = 0; j < objarr.length - 1 - i; j++) {
+          if (objarr[j] > objarr[j + 1]) {
+            tmp = objarr[j];
+            objarr[j] = objarr[j + 1];
+            objarr[j + 1] = tmp;
+          }
+        }
+      }
+      console.log(objarr);
+    </script>
+  </head>
+  <body></body>
+</html>

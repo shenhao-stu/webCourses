@@ -804,3 +804,214 @@ touchstart、touchmove、touchend 三个事件都会各自有事件对象。
 （3）离开手指 touchend
 
 注意： 手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动 e.preventDefault();
+
+#### 2.移动端常见特效
+
+##### 2.1 classList 属性
+
+classList属性是HTML5新增的一个属性，返回元素的类名。但是ie10以上版本支持。
+该属性用于在元素中添加，移除及切换CSS类。有以下方法
+
+==添加类==
+
+```javascript
+element.classList.add（’类名’）；
+```
+
+==移除类==
+
+```javascript
+element.classList.remove('类名');
+```
+
+==切换类==
+
+```javascript
+element.classList.toggle('类名');
+```
+
+> 注意以上方法里面，所有类名都不带点
+
+
+
+**案例分析：移动端轮播图！！！**
+
+##### 2.2 click 延时解决方案
+
+移动端 click 事件会有 300ms 的延时，原因是移动端屏幕双击会缩放(double tap to zoom) 页面。】
+
+解决方案：
+
+1. 禁用缩放。 浏览器禁用默认的双击缩放行为并且去掉 300ms 的点击延迟。
+```javascript
+  <meta name="viewport" content="user-scalable=no">
+```
+2. 利用touch事件自己封装这个事件解决 300ms 延迟。
+原理就是：
+1.当我们手指触摸屏幕，记录当前触摸时间
+2.当我们手指离开屏幕， 用离开的时间减去触摸的时间
+3.如果时间小于150ms，并且没有滑动过屏幕， 那么我们就定义为点击
+```javascript
+//封装tap，解决click 300ms 延时
+function tap (obj, callback) {
+  var isMove = false;
+  var startTime = 0; // 记录触摸时候的时间变量
+  obj.addEventListener('touchstart', function (e) {
+      startTime = Date.now(); // 记录触摸时间
+  });
+  obj.addEventListener('touchmove', function (e) {
+      isMove = true;  // 看看是否有滑动，有滑动算拖拽，不算点击
+  });
+  obj.addEventListener('touchend', function (e) {
+      if (!isMove && (Date.now() - startTime) < 150) {  // 如果手指触摸和离开时间小于150ms 算点击
+          callback && callback(); // 执行回调函数
+      }
+      isMove = false;  //  取反 重置
+      startTime = 0;
+  });
+}
+//调用
+tap(div, function(){});
+```
+
+3. 使用插件。 fastclick 插件解决 300ms 延迟。
+
+#### 3.移动端常用开发插件
+
+##### 3.1 什么是插件
+
+移动端要求的是快速开发，所以我们经常会借助于一些插件来帮我完成操作，那么什么是插件呢？
+
+JS 插件是 js 文件，它遵循一定规范编写，方便程序展示效果，拥有特定功能且方便调用。如轮播图和瀑布流插件。
+
+特点：它一般是为了解决某个问题而专门存在，其功能单一，并且比较小。
+
+- 我们以前写的animate.js 也算一个最简单的插件。
+- fastclick 插件解决 300ms 延迟。GitHub官网地址： https://github.com/ftlabs/fastclick
+
+##### 3.2 插件的使用
+
+1. 引入 js 插件文件。
+
+2. 按照规定语法使用。
+
+##### 3.3 Swiper 插件的使用
+
+中文官网地址： https://www.swiper.com.cn/ 
+1. 引入插件相关文件。
+2. 按照规定语法使用
+
+##### 3.4 其他移动端常见插件
+
+- superslide：http://www.superslide2.com/
+- iscroll：https://github.com/cubiq/iscroll
+- zy.media：https://github.com/ireaderlab/zyMedia
+
+##### 3.5 插件的使用总结
+
+- 确认插件实现的功能
+- 去官网查看使用说明
+- 下载插件
+- 打开demo实例文件，查看需要引入的相关文件，并且引入
+- 复制demo实例文件中的结构html，样式css以及js代码
+
+#### 4.移动端常用开发框架
+
+##### 4.1 框架概述
+
+框架，顾名思义就是一套架构，它会基于自身的特点向用户提供一套较为完整的解决方案。框架的控制权在框架本身，使用者要按照框架所规定的某种规范进行开发。
+
+插件一般是为了解决某个问题而专门存在，其功能单一，并且比较小。
+
+前端常用的框架有 Bootstrap、Vue、Angular、React 等。既能开发PC端，也能开发移动端
+前端常用的移动端插件有 swiper、superslide、iscroll等。
+
+框架：大而全，一整套解决方案
+插件：小而专一，某个功能的解决方案
+
+##### 4.2 Bootstrap
+
+Bootstrap 是一个简洁、直观、强悍的前端开发框架，它让 web 开发更迅速、简单。它能开发PC端，也能开发移动端 
+
+Bootstrap JS插件使用步骤：
+
+1. 引入相关 JS 文件
+2. 复制 HTML 结构
+3. 修改对应样式
+4. 修改相应 JS 参数
+
+### 本地存储
+
+> - `window.sessionStorage`
+> - `window.localStorage`
+
+#### 1.本地存储
+
+随着互联网的快速发展，基于网页的应用越来越普遍，同时也变的越来越复杂，为了满足各种各样的需求，会经常性在本地存储大量的数据，HTML5规范提出了相关解决方案。
+
+**本地存储特性**
+
+1、数据存储在用户浏览器中
+2、设置、读取方便、甚至页面刷新不丢失数据
+3、容量较大，`sessionStorage`约5M、`localStorage`约20M
+4、只能存储字符串，可以将对象`JSON.stringify()`编码后存储
+
+#### 2.window.sessionStorage
+
+> 1、生命周期为关闭浏览器窗口
+> 2、在同一个窗口(页面)下数据可以共享
+> 3、以键值对的形式存储使用
+
+==存储数据==
+
+```javascript
+sessionStorage.setItem(key, value)
+```
+
+==获取数据==
+
+```javascript
+sessionStorage.getItem(key)
+```
+
+==删除数据==
+
+```javascript
+sessionStorage.removeItem(key)
+```
+
+==删除所有数据==
+
+```javascript
+sessionStorage.clear()
+```
+
+#### 3. window.localStorage
+
+> 1、声明周期永久生效，除非手动删除 否则关闭页面也会存在
+> 2、可以多窗口（页面）共享（同一浏览器可以共享）
+> 3、以键值对的形式存储使用
+
+==存储数据==
+
+```javascript
+localStorage.setItem(key, value)
+```
+
+==获取数据==
+
+```javascript
+localStorage.getItem(key)
+```
+
+==删除数据==
+
+```javascript
+localStorage.removeItem(key)
+```
+
+==删除所有数据==
+
+```javascript
+localStorage.clear()
+```

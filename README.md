@@ -628,5 +628,179 @@ function animate(obj, target) {
 
 var div = document.querySelector("div");
 var span = document.querySelector("span");
+// 调用函数
+animate(div, 300);
+animate(span, 200);
 ```
 
+##### 5.4 缓动效果原理
+
+缓动动画就是让元素运动速度有所变化，最常见的是让速度慢慢停下来
+
+思路：
+
+1. 让盒子每次移动的距离慢慢变小，速度就会慢慢落下来。
+2. 核心算法: step = (目标值-现在的位置)/10
+3. 停止的条件是: 让当前盒子位置等于目标位置就停止定时器  
+4. 注意步长值需要取整 Math.ceil
+
+```javascript
+// 缓动动画函数封装obj目标对象 target 目标位置
+// 思路：
+// 1. 让盒子每次移动的距离慢慢变小， 速度就会慢慢落下来。
+// 2. 核心算法：(目标值 - 现在的位置) / 10 做为每次移动的距离 步长
+// 3. 停止的条件是：让当前盒子位置等于目标位置就停止定时器
+function animate(obj, target) {
+  // 先清除以前的定时器，只保留当前的一个定时器执行
+  clearInterval(obj.timer);
+  obj.timer = setInterval(function () {
+    // 步长值写到定时器的里面
+    var step = Math.ceil((target - obj.offsetLeft) / 10);
+    if (obj.offsetLeft == target) {
+      // 停止动画 本质是停止定时器
+      clearInterval(obj.timer);
+    }
+    // 把每次加1这个步长值改为一个慢慢变小的值 步长公式：(目标值 - 现在的位置) / 10
+    obj.style.left = obj.offsetLeft + step + "px";
+  }, 15);
+}
+
+var div = document.querySelector("div");
+// 调用函数
+animate(div, 300);
+```
+
+##### 5.5 动画函数多个目标值之间移动
+
+可以让动画函数从 800 移动到 500 。
+当我们点击按钮时候，判断步长是正值还是负值
+
+- 如果是正值，则步长往大了取整 `Math.ceil()`
+- 如果是负值，则步长向小了取整 `Math.floor()`
+
+```javascript
+var step = (target - obj.offsetLeft) / 10;
+step = step > 0 ? Math.ceil(step) : Math.floor(step);
+```
+
+##### 5.6 动画函数添加回调函数
+
+**回调函数原理**：函数可以作为一个参数。将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，再执行传进去的这个函数，这个过程就叫做回调。
+
+**回调函数写的位置**：定时器结束的位置。
+
+```javascript
+function animate(obj, target, callback) {
+  // console.log(callback);  callback = function() {}  调用的时候 callback()
+
+  // 先清除以前的定时器，只保留当前的一个定时器执行
+  clearInterval(obj.timer);
+  obj.timer = setInterval(function () {
+    // 步长值写到定时器的里面
+    // 把我们步长值改为整数 不要出现小数的问题
+    // var step = Math.ceil((target - obj.offsetLeft) / 10);
+    var step = (target - obj.offsetLeft) / 10;
+    step = step > 0 ? Math.ceil(step) : Math.floor(step);
+    if (obj.offsetLeft == target) {
+      // 停止动画 本质是停止定时器
+      clearInterval(obj.timer);
+      // 回调函数写到定时器结束里面
+      if (callback) {
+        // 调用函数
+        callback(
+        );
+      }
+    }
+    // 把每次加1 这个步长值改为一个慢慢变小的值  步长公式：(目标值 - 现在的位置) / 10
+    obj.style.left = obj.offsetLeft + step + "px";
+  }, 15);
+}
+var btn800 = document.querySelector(".btn800");
+btn800.addEventListener("click", function () {
+  // 调用函数
+  animate(span, 800, function () {
+    // alert('你好吗');
+    span.style.backgroundColor = "red";
+  });
+});
+```
+
+
+
+> Question:
+>
+> 为什么span.style.backgroudColor=“red”优先级较后
+>
+> <img src="README.assets/image-20220307111114110.png" alt="image-20220307111114110" style="zoom:50%;" />
+
+##### 5.7 手动调用点击事件
+
+```javascript
+var timer = setInterval(function(){
+  arrow_r.click();
+},2000)
+```
+
+##### 5.8 节流阀
+
+防止轮播图按钮连续点击造成播放过快。
+节流阀目的：当上一个函数动画内容执行完毕，再去执行下一个函数动画，让事件无法连续触发。
+
+> ==核心实现思路==: 
+>
+> - 利用回调函数，添加一个变量来控制，锁住函数和解锁函数。 
+> - 开始设置一个变量 var flag = true;
+> - If(flag) {flag = false; do something} 关闭水龙头
+> - 利用回调函数，动画执行完毕，flag = true   打开水龙头
+
+##### 5.9 返回顶部
+
+滚动窗口至文档中的特定位置 `window.scroll(x,y) `
+
+> 注意，里面的 x 和 y 不跟单位，直接写数字
+
+### 移动端网页特效
+
+> 学习目标：
+>
+> 1. 触屏事件
+> 2. 移动端常见特效
+> 3. 移动端常用开发插件
+> 4. 移动端常用开发框架
+
+#### 1.触屏事件
+
+##### 1.1 触屏事件概述 
+
+移动端浏览器兼容性较好，我们不需要考虑以前 JS 的兼容性问题，可以放心的使用原生 JS 书写效果，但是移动端也有自己独特的地方。比如触屏事件 touch（也称触摸事件），Android 和 IOS 都有。
+
+touch 对象代表一个触摸点。触摸点可能是一根手指，也可能是一根触摸笔。触屏事件可响应用户手指（或触控笔）对屏幕或者触控板操作。
+
+常见的触屏事件如下：
+
+<img src="README.assets/image-20220307140433188.png" style="zoom:50%;" />
+
+##### 1.2 触摸事件对象（TouchEvent）
+
+TouchEvent 是一类描述手指在触摸平面（触摸屏、触摸板等）的状态变化的事件。这类事件用于描述一个或多个触点，使开发者可以检测触点的移动，触点的增加和减少，等等
+
+touchstart、touchmove、touchend 三个事件都会各自有事件对象。
+
+触摸事件对象重点我们看三个常见对象列表: 
+
+<img src="README.assets/image-20220307140531401.png" style="zoom:50%;" />
+
+##### 1.3 移动端拖动元素
+
+1. touchstart、touchmove、touchend 可以实现拖动元素
+
+2. 但是拖动元素需要当前手指的坐标值 我们可以使用 targetTouches[0] 里面的pageX 和 pageY 
+3. 移动端拖动的原理：手指移动中，计算出手指移动的距离。然后用盒子原来的位置 + 手指移动的距离
+4. 手指移动的距离：手指滑动中的位置-手指刚开始触摸的位置
+
+==拖动元素三步曲==：
+（1）触摸元素 touchstart: 获取手指初始坐标，同时获得盒子原来的位置
+（2）移动手指 touchmove: 计算手指的滑动距离，并且移动盒子
+（3）离开手指 touchend
+
+注意： 手指移动也会触发滚动屏幕所以这里要阻止默认的屏幕滚动 e.preventDefault();

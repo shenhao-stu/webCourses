@@ -53,7 +53,7 @@
             // 回调函数写到定时器结束里面
             if (callback) {
               // 调用函数
-              callback();
+              callback("shenhao");
             }
           }
           // 把每次加1 这个步长值改为一个慢慢变小的值  步长公式：(目标值 - 现在的位置) / 10
@@ -70,9 +70,10 @@
       });
       btn800.addEventListener("click", function () {
         // 调用函数
-        animate(span, 800, function () {
+        animate(span, 800, function (name) {
           // alert('你好吗');
           span.style.backgroundColor = "red";
+          console.log("Hello world:" + name);
         });
       });
       // 匀速动画 就是 盒子是当前的位置 +  固定的值 10
